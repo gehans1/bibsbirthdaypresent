@@ -1,154 +1,744 @@
-+   1 <!DOCTYPE html>
-+   2 <html lang="en">
-+   3 <head>
-+   4     <meta charset="UTF-8">
-+   5     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+   6     <title>Happy Birthday Fahimah! 💝</title>
-+   7     <link rel="stylesheet" href="styles.css">
-+   8 </head>
-+   9 <body>
-+  10     <div class="book-container">
-+  11         <div class="book">
-+  12             <!-- Page 1: Cover -->
-+  13             <div class="page active" id="page1">
-+  14                 <div class="page-content cover-page">
-+  15                     <h1 class="birthday-title">Happy Birthday</h1>
-+  16                     <h2 class="name">Fahimah</h2>
-+  17                     <div class="heart">💝</div>
-+  18                     <div class="cover-image-container">
-+  19                         <img src="images/us.jpg" alt="Us together" class="cover-image">
-+  20                         <p class="cover-caption">Another year of wonderful memories together</p>
-+  21                     </div>
-+  22                     <button class="nav-btn next-btn" onclick="nextPage()">Open →</button>
-+  23                 </div>
-+  24             </div>
-+  25 
-+  26             <!-- Page 2: Our Best Memories Part 1 -->
-+  27             <div class="page" id="page2">
-+  28                 <div class="page-content">
-+  29                     <h2 class="page-title">Our Best Memories 💫</h2>
-+  30                     <div class="memory-grid">
-+  31                         <div class="memory-item">
-+  32                             <div class="memory-image">
-+  33                                 <img src="images/memory1.jpg" alt="Memory 1">
-+  34                             </div>
-+  35                             <div class="memory-text">
-+  36                                 <h3>That Perfect Day</h3>
-+  37                                 <p>Remember when we spent the entire day exploring the city? Your laughter made every moment magical. That's when I knew every day with you is an adventure.</p>
-+  38                             </div>
-+  39                         </div>
-+  40                         <div class="memory-item">
-+  41                             <div class="memory-image">
-+  42                                 <img src="images/memory2.jpg" alt="Memory 2">
-+  43                             </div>
-+  44                             <div class="memory-text">
-+  45                                 <h3>Our First Adventure</h3>
-+  46                                 <p>The trip where everything went perfectly. We laughed until our sides hurt and created memories I'll cherish forever.</p>
-+  47                             </div>
-+  48                         </div>
-+  49                     </div>
-+  50                     <div class="nav-buttons">
-+  51                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
-+  52                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
-+  53                     </div>
-+  54                 </div>
-+  55             </div>
-+  56 
-+  57             <!-- Page 3: More Memories -->
-+  58             <div class="page" id="page3">
-+  59                 <div class="page-content">
-+  60                     <h2 class="page-title">More Beautiful Moments ✨</h2>
-+  61                     <div class="memory-grid">
-+  62                         <div class="memory-item">
-+  63                             <div class="memory-image">
-+  64                                 <img src="images/memory3.jpg" alt="Memory 3">
-+  65                             </div>
-+  66                             <div class="memory-text">
-+  67                                 <h3>Cozy Evenings</h3>
-+  68                                 <p>All those nights we stayed in, watching movies and just being together. Simple moments that mean everything.</p>
-+  69                             </div>
-+  70                         </div>
-+  71                         <div class="memory-item">
-+  72                             <div class="memory-image">
-+  73                                 <img src="images/memory4.jpg" alt="Memory 4">
-+  74                             </div>
-+  75                             <div class="memory-text">
-+  76                                 <h3>Spontaneous Fun</h3>
-+  77                                 <p>That time we decided to just go for it and ended up having the best time ever. You make every moment special.</p>
-+  78                             </div>
-+  79                         </div>
-+  80                     </div>
-+  81                     <div class="nav-buttons">
-+  82                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
-+  83                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
-+  84                     </div>
-+  85                 </div>
-+  86             </div>
-+  87 
-+  88             <!-- Page 4: Our Best Eats -->
-+  89             <div class="page" id="page4">
-+  90                 <div class="page-content">
-+  91                     <h2 class="page-title">Our Best Eats 🍽️</h2>
-+  92                     <div class="eats-container">
-+  93                         <div class="eat-item medal gold">
-+  94                             <div class="medal-icon">🥇</div>
-+  95                             <div class="eat-image">
-+  96                                 <img src="images/food1.jpg" alt="Our favorite meal">
-+  97                             </div>
-+  98                             <div class="eat-text">
-+  99                                 <h3>#1 That Amazing Restaurant</h3>
-+ 100                                 <p>The pasta was incredible, but the company was even better. This is where we always go for special occasions.</p>
-+ 101                             </div>
-+ 102                         </div>
-+ 103                         <div class="eat-item medal silver">
-+ 104                             <div class="medal-icon">🥈</div>
-+ 105                             <div class="eat-image">
-+ 106                                 <img src="images/food2.jpg" alt="Second favorite">
-+ 107                             </div>
-+ 108                             <div class="eat-text">
-+ 109                                 <h3>#2 Our Comfort Spot</h3>
-+ 110                                 <p>The place we discovered together and keep coming back to. Every bite reminds me of us.</p>
-+ 111                             </div>
-+ 112                         </div>
-+ 113                         <div class="eat-item medal bronze">
-+ 114                             <div class="medal-icon">🥉</div>
-+ 115                             <div class="eat-image">
-+ 116                                 <img src="images/food3.jpg" alt="Third favorite">
-+ 117                             </div>
-+ 118                             <div class="eat-text">
-+ 119                                 <h3>#3 Late Night Cravings</h3>
-+ 120                                 <p>That spot we found at midnight when we were both starving. Best spontaneous decision ever!</p>
-+ 121                             </div>
-+ 122                         </div>
-+ 123                     </div>
-+ 124                     <div class="nav-buttons">
-+ 125                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
-+ 126                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
-+ 127                     </div>
-+ 128                 </div>
-+ 129             </div>
-+ 130 
-+ 131             <!-- Page 5: Final Page -->
-+ 132             <div class="page" id="page5">
-+ 133                 <div class="page-content final-page">
-+ 134                     <h2 class="page-title">Here's to Many More 🎂</h2>
-+ 135                     <div class="final-message">
-+ 136                         <p class="big-text">Thank you for being you</p>
-+ 137                         <p>Every day with you is a gift. You make life more beautiful, more fun, and infinitely more meaningful.</p>
-+ 138                         <p>I'm so grateful for all our memories together, and I can't wait to create countless more.</p>
-+ 139                         <div class="balloon-container">
-+ 140                             <span class="balloon">🎈</span>
-+ 141                             <span class="balloon">🎈</span>
-+ 142                             <span class="balloon">🎈</span>
-+ 143                         </div>
-+ 144                         <p class="signature">Happy Birthday, my love! 💕</p>
-+ 145                     </div>
-+ 146                     <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
-+ 147                 </div>
-+ 148             </div>
-+ 149         </div>
-+ 150     </div>
-+ 151 
-+ 152     <script src="script.js"></script>
-+ 153 </body>
-+ 154 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Fahimah! 📖💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background: #2b1b0e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 30% 30%, #3d2a17, #1a1209);
+        }
+
+        /* Main book container */
+        .book-wrapper {
+            perspective: 2500px;
+            width: 100%;
+            max-width: 1200px;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+            border-radius: 20px 10px 10px 20px;
+        }
+
+        /* Book spine effect */
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(90deg, #8b6b4d, #c19a6b, #8b6b4d);
+            transform: translateX(-50%);
+            border-radius: 5px;
+            box-shadow: inset -2px 0 5px rgba(0,0,0,0.3), inset 2px 0 5px rgba(255,255,255,0.2);
+            z-index: 100;
+        }
+
+        /* Pages container */
+        .pages {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        /* Individual page */
+        .page {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            background: #fff9f0;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            padding: 40px;
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.8s ease;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #c19a6b #f5e6d3;
+        }
+
+        .page::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .page::-webkit-scrollbar-track {
+            background: #f5e6d3;
+        }
+
+        .page::-webkit-scrollbar-thumb {
+            background: #c19a6b;
+            border-radius: 4px;
+        }
+
+        /* Left pages */
+        .page.left {
+            left: 0;
+            border-radius: 20px 0 0 20px;
+            background: linear-gradient(to right, #fff9f0, #f5e6d3);
+            border-right: 2px solid #d4b08c;
+            transform-origin: right center;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+
+        /* Right pages */
+        .page.right {
+            right: 0;
+            border-radius: 0 20px 20px 0;
+            background: linear-gradient(to left, #fff9f0, #f5e6d3);
+            border-left: 2px solid #d4b08c;
+            transform-origin: left center;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        }
+
+        /* Page turning animations */
+        .page.left.turned {
+            transform: rotateY(160deg) scale(0.95);
+            box-shadow: -20px 10px 30px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .page.right.turned {
+            transform: rotateY(-160deg) scale(0.95);
+            box-shadow: 20px 10px 30px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .page.right.focused {
+            transform: scale(1.02) translateZ(30px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .page.left.focused {
+            transform: scale(1.02) translateZ(30px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        /* Cover page styling */
+        .cover {
+            background: linear-gradient(135deg, #c42e2e, #8b1e1e) !important;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20,20 Q40,10 60,20 Q80,30 80,50 Q80,70 60,80 Q40,90 20,80 Q0,70 0,50 Q0,30 20,20" fill="none" stroke="white" stroke-width="2"/><path d="M40,30 Q55,25 70,30 Q80,40 70,50 Q80,60 70,70 Q55,75 40,70 Q25,65 30,50 Q25,35 40,30" fill="none" stroke="white" stroke-width="2"/></svg>') repeat;
+            background-size: 100px;
+            opacity: 0.2;
+        }
+
+        .cover h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: titleGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 4px 4px 0px rgba(0,0,0,0.2); }
+            50% { text-shadow: 8px 8px 20px rgba(255,215,0,0.5); }
+        }
+
+        .cover h2 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-bottom: 4px solid gold;
+            padding-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-image-container {
+            position: relative;
+            z-index: 1;
+            margin: 30px 0;
+        }
+
+        .cover-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid gold;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.5s ease;
+        }
+
+        .cover-image:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Page content styling */
+        .page-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            color: #8b1e1e;
+            margin-bottom: 30px;
+            font-weight: bold;
+            border-bottom: 3px solid #c19a6b;
+            padding-bottom: 15px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* Memory items */
+        .memory-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .memory-item {
+            display: flex;
+            gap: 25px;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(193, 154, 107, 0.3);
+        }
+
+        .memory-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .memory-item:nth-child(even) {
+            flex-direction: row-reverse;
+            background: linear-gradient(135deg, #fff5e6, white);
+        }
+
+        .memory-image {
+            flex: 0 0 200px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .memory-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .memory-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .memory-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(193,154,107,0.2), transparent);
+            pointer-events: none;
+        }
+
+        .memory-text h3 {
+            font-size: 1.8rem;
+            color: #8b1e1e;
+            margin-bottom: 10px;
+        }
+
+        .memory-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a3a2a;
+        }
+
+        /* Best eats page */
+        .eats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .eat-item {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .eat-item:hover {
+            transform: translateX(10px);
+        }
+
+        .eat-item.gold {
+            background: linear-gradient(135deg, #f9e5b3, #ffd700);
+            border-color: #b8860b;
+        }
+
+        .eat-item.silver {
+            background: linear-gradient(135deg, #e8e8e8, #c0c0c0);
+            border-color: #808080;
+        }
+
+        .eat-item.bronze {
+            background: linear-gradient(135deg, #f0d9c0, #cd7f32);
+            border-color: #8b4513;
+        }
+
+        .medal-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .eat-image {
+            flex: 0 0 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .eat-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .eat-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c1810;
+        }
+
+        .eat-text p {
+            color: #3d2a17;
+            font-size: 1rem;
+        }
+
+        /* Final page */
+        .final-page {
+            background: linear-gradient(135deg, #fce5d7, #ffd7be);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .final-message {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .big-text {
+            font-size: 2.5rem;
+            color: #8b1e1e;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .balloon-container {
+            margin: 40px 0;
+        }
+
+        .balloon {
+            font-size: 4rem;
+            display: inline-block;
+            margin: 0 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(2) { animation-delay: 0.3s; }
+        .balloon:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .signature {
+            font-size: 2rem;
+            color: #c42e2e;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        /* Navigation buttons */
+        .nav-btn {
+            background: #8b1e1e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 20px 0;
+            align-self: center;
+        }
+
+        .nav-btn:hover {
+            background: #a52a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            gap: 20px;
+        }
+
+        /* Page curl effect */
+        .page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .page.left::after {
+            right: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent);
+        }
+
+        .page.right::after {
+            left: 0;
+            background: linear-gradient(270deg, rgba(0,0,0,0.1), transparent);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .book-wrapper {
+                height: 600px;
+            }
+            
+            .page {
+                padding: 25px;
+            }
+            
+            .cover h1 { font-size: 3.5rem; }
+            .cover h2 { font-size: 3rem; }
+            .cover-image { width: 200px; height: 200px; }
+            
+            .memory-item {
+                flex-direction: column !important;
+            }
+            
+            .memory-image {
+                flex: 0 0 auto;
+            }
+            
+            .eat-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-wrapper">
+        <div class="book" id="book">
+            <div class="pages">
+                <!-- Page 1: Cover (Left) -->
+                <div class="page left cover" id="page1" data-page="1">
+                    <div class="page-content">
+                        <h1>Happy Birthday</h1>
+                        <h2>Fahimah</h2>
+                        <div class="cover-image-container">
+                            <img src="images/us.jpg" alt="Us Together" class="cover-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'280\' height=\'280\' viewBox=\'0 0 280 280\'><rect width=\'280\' height=\'280\' fill=\'%23c19a6b\'/><circle cx=\'140\' cy=\'100\' r=\'40\' fill=\'%23f5e6d3\'/><circle cx=\'100\' cy=\'180\' r=\'30\' fill=\'%23f5e6d3\'/><circle cx=\'180\' cy=\'180\' r=\'30\' fill=\'%23f5e6d3\'/><text x=\'140\' y=\'250\' font-size=\'30\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>❤️</text></svg>'">
+                        </div>
+                        <p style="font-size: 1.3rem; margin: 20px 0; font-style: italic;">Our story in pages</p>
+                        <button class="nav-btn" onclick="openBook()">Open Book →</button>
+                    </div>
+                </div>
+
+                <!-- Page 2: Cover Back/Intro (Right) -->
+                <div class="page right" id="page2" data-page="2">
+                    <div class="page-content">
+                        <h2 class="page-title">To My Dearest Fahimah</h2>
+                        <div style="font-size: 1.3rem; line-height: 1.8; margin: 40px 0;">
+                            <p>Another year around the sun, and my love for you grows stronger every day.</p>
+                            <p style="margin: 30px 0;">This book holds some of our favorite memories together - a small glimpse into the joy you bring to my life.</p>
+                            <p style="font-style: italic; color: #8b1e1e;">Happy Birthday, my love.</p>
+                        </div>
+                        <div style="font-size: 5rem; text-align: center; margin-top: auto;">💝</div>
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">← Back</button>
+                            <button class="nav-btn" onclick="nextPage()">Start Reading →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3: Memory 1 (Left) -->
+                <div class="page left" id="page3" data-page="3">
+                    <div class="page-content">
+                        <h2 class="page-title">Our First Memories ✨</h2>
+                        <div class="memory-grid">
+                            <div class="memory-item">
+                                <div class="memory-image">
+                                    <img src="images/memory1.jpg" alt="Memory 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'200\' height=\'200\' fill=\'%23c19a6b\'/><text x=\'100\' y=\'100\' font-size=\'50\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>📸</text><text x=\'100\' y=\'150\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>Memory 1</text></svg>'">
+                                </div>
+                                <div class="memory-text">
+                                    <h3>When It All Began</h3>
+                                    <p>That first day we met, I had no idea my life was about to change forever. Your smile lit up the room, and I knew I had to know you.</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <div class="memory-image">
+                                    <img src="images/memory2.jpg" alt="Memory 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'200\' height=\'200\' fill=\'%23c19a6b\'/><text x=\'100\' y=\'100\' font-size=\'50\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>📸</text><text x=\'100\' y=\'150\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>Memory 2</text></svg>'">
+                                </div>
+                                <div class="memory-text">
+                                    <h3>Our First Adventure</h3>
+                                    <p>Remember that spontaneous road trip? Getting lost never felt so right. We sang, we laughed, and we created a memory I'll treasure forever.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">← Back</button>
+                            <button class="nav-btn" onclick="nextPage()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4: Memory 2 (Right) -->
+                <div class="page right" id="page4" data-page="4">
+                    <div class="page-content">
+                        <h2 class="page-title">More Beautiful Moments 💫</h2>
+                        <div class="memory-grid">
+                            <div class="memory-item">
+                                <div class="memory-image">
+                                    <img src="images/memory3.jpg" alt="Memory 3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'200\' height=\'200\' fill=\'%23c19a6b\'/><text x=\'100\' y=\'100\' font-size=\'50\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>📸</text><text x=\'100\' y=\'150\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>Memory 3</text></svg>'">
+                                </div>
+                                <div class="memory-text">
+                                    <h3>Cozy Nights In</h3>
+                                    <p>All those nights we spent just talking until sunrise. The world faded away, and it was just us. Those are the moments I hold closest to my heart.</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <div class="memory-image">
+                                    <img src="images/memory4.jpg" alt="Memory 4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><rect width=\'200\' height=\'200\' fill=\'%23c19a6b\'/><text x=\'100\' y=\'100\' font-size=\'50\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>📸</text><text x=\'100\' y=\'150\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'>Memory 4</text></svg>'">
+                                </div>
+                                <div class="memory-text">
+                                    <h3>Celebrating You</h3>
+                                    <p>Last year's birthday - watching your eyes light up with every surprise. Your happiness is my happiness.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">← Back</button>
+                            <button class="nav-btn" onclick="nextPage()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 5: Best Eats Part 1 (Left) -->
+                <div class="page left" id="page5" data-page="5">
+                    <div class="page-content">
+                        <h2 class="page-title">Our Best Eats 🍽️</h2>
+                        <div class="eats-container">
+                            <div class="eat-item gold">
+                                <div class="medal-icon">🥇</div>
+                                <div class="eat-image">
+                                    <img src="images/food1.jpg" alt="Food 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\' viewBox=\'0 0 150 150\'><rect width=\'150\' height=\'150\' fill=\'%23ffd700\'/><text x=\'75\' y=\'85\' font-size=\'60\' text-anchor=\'middle\' fill=\'white\'>🍝</text></svg>'">
+                                </div>
+                                <div class="eat-text">
+                                    <h3>#1 That Perfect Italian Place</h3>
+                                    <p>The carbonara that started it all. Every bite reminds me of our first date.</p>
+                                </div>
+                            </div>
+                            <div class="eat-item silver">
+                                <div class="medal-icon">🥈</div>
+                                <div class="eat-image">
+                                    <img src="images/food2.jpg" alt="Food 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\' viewBox=\'0 0 150 150\'><rect width=\'150\' height=\'150\' fill=\'%23c0c0c0\'/><text x=\'75\' y=\'85\' font-size=\'60\' text-anchor=\'middle\' fill=\'white\'>🍜</text></svg>'">
+                                </div>
+                                <div class="eat-text">
+                                    <h3>#2 Our Ramen Spot</h3>
+                                    <p>Rainy days and ramen with you - my favorite comfort food combination.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">← Back</button>
+                            <button class="nav-btn" onclick="nextPage()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 6: Best Eats Part 2 & Final (Right) -->
+                <div class="page right" id="page6" data-page="6">
+                    <div class="page-content">
+                        <div class="eats-container" style="margin-bottom: 20px;">
+                            <div class="eat-item bronze">
+                                <div class="medal-icon">🥉</div>
+                                <div class="eat-image">
+                                    <img src="images/food3.jpg" alt="Food 3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\' viewBox=\'0 0 150 150\'><rect width=\'150\' height=\'150\' fill=\'%23cd7f32\'/><text x=\'75\' y=\'85\' font-size=\'60\' text-anchor=\'middle\' fill=\'white\'>🍦</text></svg>'">
+                                </div>
+                                <div class="eat-text">
+                                    <h3>#3 Late Night Ice Cream</h3>
+                                    <p>2am ice cream runs and deep conversations. The best cravings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="final-message" style="margin-top: 30px; border-top: 2px solid #c19a6b; padding-top: 30px;">
+                            <p class="big-text">Here's to Many More</p>
+                            <div class="balloon-container">
+                                <span class="balloon">🎈</span>
+                                <span class="balloon">🎈</span>
+                                <span class="balloon">🎈</span>
+                            </div>
+                            <p style="font-size: 1.3rem; margin: 20px 0;">Thank you for being the most amazing person in my life.</p>
+                            <p class="signature">Happy Birthday, my love! 💕</p>
+                        </div>
+                        
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">← Back</button>
+                            <button class="nav-btn" onclick="closeBook()">Close Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpread = 0;
+        const pages = document.querySelectorAll('.page');
+        const totalSpreads = 3; // 6 pages = 3 spreads
+
+        function updateBook() {
+            pages.forEach((page, index) => {
+                page.classList.remove('turned', 'focused');
+                
+                // Calculate if page should be turned based on current spread
+                if (index < currentSpread * 2) {
+                    // Pages before current spread (turned)
+                    if (index % 2 === 0) {
+                        page.classList.add('turned'); // Left pages
+                    }
+                } else if (index >= (currentSpread + 1) * 2) {
+                    // Pages after current spread (turned)
+                    if (index % 2 === 1) {
+                        page.classList.add('turned'); // Right pages
+                    }
+                } else {
+                    // Current spread - focus these pages
+                    page.classList.add('focused');
+                }
+            });
+        }
+
+        function nextPage() {
+            if (currentSpread < totalSpreads - 1) {
+                currentSpread++;
+                updateBook();
+            }
+        }
+
+        function prevPage() {
+            if (currentSpread > 0) {
+                currentSpread--;
+                updateBook();
+            }
+        }
+
+        function openBook() {
+            currentSpread = 0;
+            updateBook();
+            // Focus on first spread after cover
+            setTimeout(() => {
+                currentSpread = 1;
+                updateBook();
+            }, 800);
+        }
+
+        function closeBook() {
+            currentSpread = 0;
+            updateBook();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                prevPage();
+            }
+        });
+
+        // Initial book state (closed)
+        updateBook();
+
+        // Add smooth zoom effect on page click
+        pages.forEach(page => {
+            page.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('nav-btn')) {
+                    this.classList.add('focused');
+                    setTimeout(() => {
+                        this.classList.remove('focused');
+                    }, 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

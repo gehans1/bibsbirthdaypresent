@@ -1,41 +1,154 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Happy Birthday!</title>
-    <style>
-        body { background: #fdf5e6; font-family: 'Georgia', serif; color: #4a3728; line-height: 1.6; padding: 20px; }
-        .book { max-width: 600px; margin: 0 auto; background: white; padding: 50px; box-shadow: 5px 5px 20px rgba(0,0,0,0.1); border-left: 10px solid #8b4513; }
-        h1 { text-align: center; color: #d2691e; }
-        .chapter { margin-bottom: 40px; border-bottom: 1px dashed #ccc; padding-bottom: 20px; }
-        img { width: 100%; border-radius: 5px; margin: 10px 0; }
-        .eatery-tag { background: #ffe4b5; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; }
-    </style>
-</head>
-<body>
-
-<div class="book">
-    <h1>Our Story: Vol. 1</h1>
-    
-    <div class="chapter">
-        <h2>Chapter 1: Where it Began</h2>
-        <p>Remember that time at the park? Here is where I knew you were the one.</p>
-        <img src="https://via.placeholder.com/600x400" alt="Memory 1">
-    </div>
-
-    <div class="chapter">
-        <h2>Chapter 2: The Best Eats 🍕</h2>
-        <ul>
-            <li><strong>The Pizza Spot:</strong> <span class="eatery-tag">Our First Date</span></li>
-            <li><strong>That Taco Truck:</strong> <span class="eatery-tag">Late Night Vibes</span></li>
-            <li><strong>The Fancy Cafe:</strong> <span class="eatery-tag">Best Coffee Ever</span></li>
-        </ul>
-    </div>
-
-    <div class="chapter" style="text-align: center;">
-        <h2>Happy Birthday, Beautiful!</h2>
-        <p>I can't wait to write Chapter 3 with you.</p>
-    </div>
-</div>
-
-</body>
-</html>
++   1 <!DOCTYPE html>
++   2 <html lang="en">
++   3 <head>
++   4     <meta charset="UTF-8">
++   5     <meta name="viewport" content="width=device-width, initial-scale=1.0">
++   6     <title>Happy Birthday Fahimah! 💝</title>
++   7     <link rel="stylesheet" href="styles.css">
++   8 </head>
++   9 <body>
++  10     <div class="book-container">
++  11         <div class="book">
++  12             <!-- Page 1: Cover -->
++  13             <div class="page active" id="page1">
++  14                 <div class="page-content cover-page">
++  15                     <h1 class="birthday-title">Happy Birthday</h1>
++  16                     <h2 class="name">Fahimah</h2>
++  17                     <div class="heart">💝</div>
++  18                     <div class="cover-image-container">
++  19                         <img src="images/us.jpg" alt="Us together" class="cover-image">
++  20                         <p class="cover-caption">Another year of wonderful memories together</p>
++  21                     </div>
++  22                     <button class="nav-btn next-btn" onclick="nextPage()">Open →</button>
++  23                 </div>
++  24             </div>
++  25 
++  26             <!-- Page 2: Our Best Memories Part 1 -->
++  27             <div class="page" id="page2">
++  28                 <div class="page-content">
++  29                     <h2 class="page-title">Our Best Memories 💫</h2>
++  30                     <div class="memory-grid">
++  31                         <div class="memory-item">
++  32                             <div class="memory-image">
++  33                                 <img src="images/memory1.jpg" alt="Memory 1">
++  34                             </div>
++  35                             <div class="memory-text">
++  36                                 <h3>That Perfect Day</h3>
++  37                                 <p>Remember when we spent the entire day exploring the city? Your laughter made every moment magical. That's when I knew every day with you is an adventure.</p>
++  38                             </div>
++  39                         </div>
++  40                         <div class="memory-item">
++  41                             <div class="memory-image">
++  42                                 <img src="images/memory2.jpg" alt="Memory 2">
++  43                             </div>
++  44                             <div class="memory-text">
++  45                                 <h3>Our First Adventure</h3>
++  46                                 <p>The trip where everything went perfectly. We laughed until our sides hurt and created memories I'll cherish forever.</p>
++  47                             </div>
++  48                         </div>
++  49                     </div>
++  50                     <div class="nav-buttons">
++  51                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
++  52                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
++  53                     </div>
++  54                 </div>
++  55             </div>
++  56 
++  57             <!-- Page 3: More Memories -->
++  58             <div class="page" id="page3">
++  59                 <div class="page-content">
++  60                     <h2 class="page-title">More Beautiful Moments ✨</h2>
++  61                     <div class="memory-grid">
++  62                         <div class="memory-item">
++  63                             <div class="memory-image">
++  64                                 <img src="images/memory3.jpg" alt="Memory 3">
++  65                             </div>
++  66                             <div class="memory-text">
++  67                                 <h3>Cozy Evenings</h3>
++  68                                 <p>All those nights we stayed in, watching movies and just being together. Simple moments that mean everything.</p>
++  69                             </div>
++  70                         </div>
++  71                         <div class="memory-item">
++  72                             <div class="memory-image">
++  73                                 <img src="images/memory4.jpg" alt="Memory 4">
++  74                             </div>
++  75                             <div class="memory-text">
++  76                                 <h3>Spontaneous Fun</h3>
++  77                                 <p>That time we decided to just go for it and ended up having the best time ever. You make every moment special.</p>
++  78                             </div>
++  79                         </div>
++  80                     </div>
++  81                     <div class="nav-buttons">
++  82                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
++  83                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
++  84                     </div>
++  85                 </div>
++  86             </div>
++  87 
++  88             <!-- Page 4: Our Best Eats -->
++  89             <div class="page" id="page4">
++  90                 <div class="page-content">
++  91                     <h2 class="page-title">Our Best Eats 🍽️</h2>
++  92                     <div class="eats-container">
++  93                         <div class="eat-item medal gold">
++  94                             <div class="medal-icon">🥇</div>
++  95                             <div class="eat-image">
++  96                                 <img src="images/food1.jpg" alt="Our favorite meal">
++  97                             </div>
++  98                             <div class="eat-text">
++  99                                 <h3>#1 That Amazing Restaurant</h3>
++ 100                                 <p>The pasta was incredible, but the company was even better. This is where we always go for special occasions.</p>
++ 101                             </div>
++ 102                         </div>
++ 103                         <div class="eat-item medal silver">
++ 104                             <div class="medal-icon">🥈</div>
++ 105                             <div class="eat-image">
++ 106                                 <img src="images/food2.jpg" alt="Second favorite">
++ 107                             </div>
++ 108                             <div class="eat-text">
++ 109                                 <h3>#2 Our Comfort Spot</h3>
++ 110                                 <p>The place we discovered together and keep coming back to. Every bite reminds me of us.</p>
++ 111                             </div>
++ 112                         </div>
++ 113                         <div class="eat-item medal bronze">
++ 114                             <div class="medal-icon">🥉</div>
++ 115                             <div class="eat-image">
++ 116                                 <img src="images/food3.jpg" alt="Third favorite">
++ 117                             </div>
++ 118                             <div class="eat-text">
++ 119                                 <h3>#3 Late Night Cravings</h3>
++ 120                                 <p>That spot we found at midnight when we were both starving. Best spontaneous decision ever!</p>
++ 121                             </div>
++ 122                         </div>
++ 123                     </div>
++ 124                     <div class="nav-buttons">
++ 125                         <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
++ 126                         <button class="nav-btn next-btn" onclick="nextPage()">Next →</button>
++ 127                     </div>
++ 128                 </div>
++ 129             </div>
++ 130 
++ 131             <!-- Page 5: Final Page -->
++ 132             <div class="page" id="page5">
++ 133                 <div class="page-content final-page">
++ 134                     <h2 class="page-title">Here's to Many More 🎂</h2>
++ 135                     <div class="final-message">
++ 136                         <p class="big-text">Thank you for being you</p>
++ 137                         <p>Every day with you is a gift. You make life more beautiful, more fun, and infinitely more meaningful.</p>
++ 138                         <p>I'm so grateful for all our memories together, and I can't wait to create countless more.</p>
++ 139                         <div class="balloon-container">
++ 140                             <span class="balloon">🎈</span>
++ 141                             <span class="balloon">🎈</span>
++ 142                             <span class="balloon">🎈</span>
++ 143                         </div>
++ 144                         <p class="signature">Happy Birthday, my love! 💕</p>
++ 145                     </div>
++ 146                     <button class="nav-btn prev-btn" onclick="prevPage()">← Back</button>
++ 147                 </div>
++ 148             </div>
++ 149         </div>
++ 150     </div>
++ 151 
++ 152     <script src="script.js"></script>
++ 153 </body>
++ 154 </html>

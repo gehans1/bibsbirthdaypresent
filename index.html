@@ -234,28 +234,59 @@
             50% { filter: drop-shadow(0 0 15px currentColor) drop-shadow(0 0 25px white); transform: scale(1.15) rotate(var(--rot, 0deg)); }
         }
 
-        /* Art elements only (removed dancing) */
-        .art-icon {
+        /* Decorative elements - BOTH dancing and art */
+        .decor-icon {
             position: absolute;
-            top: 50px;
-            left: 50px;
             font-size: 4rem;
-            opacity: 0.2;
+            opacity: 0.15;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .decor-dance-1 {
+            top: 30px;
+            left: 30px;
+            animation: gentleFloat 6s ease-in-out infinite;
+        }
+
+        .decor-dance-2 {
+            bottom: 40px;
+            right: 40px;
+            animation: gentleFloat 7s ease-in-out infinite reverse;
+        }
+
+        .decor-art-1 {
+            top: 60px;
+            right: 60px;
             animation: gentleSpin 12s linear infinite;
         }
 
-        .art-icon-2 {
-            position: absolute;
-            bottom: 60px;
-            right: 50px;
-            font-size: 5rem;
-            opacity: 0.15;
+        .decor-art-2 {
+            bottom: 70px;
+            left: 70px;
             animation: gentleSpin 15s linear infinite reverse;
+        }
+
+        .decor-art-3 {
+            top: 50%;
+            left: 20%;
+            transform: translateY(-50%);
+            animation: gentlePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
         @keyframes gentleSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.2); }
         }
 
         .cover h1 {
@@ -309,6 +340,12 @@
         /* Love letter page - from Soham */
         .love-letter {
             background: #fff9f0 !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-letter .decor-icon {
+            opacity: 0.1;
         }
 
         .letter-greeting {
@@ -351,12 +388,17 @@
             color: gold;
             border: 3px solid gold;
             opacity: 0.8;
+            z-index: 20;
         }
 
-        /* Art theme page */
+        /* Art theme page - ENHANCED with more art elements */
+        .art-page {
+            background: #fff5e6 !important;
+        }
+
         .art-showcase {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin: 25px 0;
         }
@@ -368,23 +410,69 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: 1px solid #c19a6b;
+            transition: transform 0.3s ease;
+        }
+
+        .art-card:hover {
+            transform: translateY(-5px);
         }
 
         .art-emoji {
             font-size: 3rem;
             margin-bottom: 10px;
+            animation: gentlePulse 3s ease-in-out infinite;
         }
 
         .art-quote {
-            background: #f0e6d2;
-            padding: 20px;
+            background: linear-gradient(135deg, #f0e6d2, #e6d8c0);
+            padding: 25px;
             border-radius: 15px;
             font-style: italic;
             font-size: 1.2rem;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
             border-left: 5px solid #8b1a1a;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .art-quote::before {
+            content: '🎨';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .art-quote::after {
+            content: '🖌️';
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .art-tools {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            font-size: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .art-tools span {
+            animation: gentleFloat 4s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .art-tools span:nth-child(2) { animation-delay: 0.3s; }
+        .art-tools span:nth-child(3) { animation-delay: 0.6s; }
+        .art-tools span:nth-child(4) { animation-delay: 0.9s; }
+        .art-tools span:nth-child(5) { animation-delay: 1.2s; }
 
         /* Memory items */
         .memory-grid {
@@ -475,13 +563,19 @@
             margin-bottom: 5px;
         }
 
-        /* Final page */
+        /* Final page - with both themes */
         .final-page {
-            background: #fff5e6 !important;
+            background: linear-gradient(135deg, #fff0e0, #ffe6d0) !important;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-page .decor-icon {
+            opacity: 0.1;
         }
 
         .big-text {
@@ -558,6 +652,7 @@
             font-size: 0.9rem;
             font-style: italic;
             opacity: 0.5;
+            z-index: 20;
         }
 
         .left .page-number {
@@ -591,7 +686,7 @@
         <div class="book" id="book">
             <div class="ribbon">✦ FAHIMAH ✦</div>
             <div class="pages">
-                <!-- PAGE 1: COVER (Left) - ONLY COVER SHOWING AT START -->
+                <!-- PAGE 1: COVER (Left) - with dancing and art decorations -->
                 <div class="page left cover" id="page1">
                     <!-- Gemstones -->
                     <div class="gem gem-1"></div>
@@ -603,9 +698,12 @@
                     <div class="gem gem-7"></div>
                     <div class="gem gem-8"></div>
                     
-                    <!-- Art elements only -->
-                    <div class="art-icon">🎨</div>
-                    <div class="art-icon-2">🖌️</div>
+                    <!-- Decorative dancing and art elements on cover -->
+                    <div class="decor-icon decor-dance-1">💃</div>
+                    <div class="decor-icon decor-dance-2">🩰</div>
+                    <div class="decor-icon decor-art-1">🎨</div>
+                    <div class="decor-icon decor-art-2">🖼️</div>
+                    <div class="decor-icon decor-art-3">✨</div>
                     
                     <div class="page-content" style="position: relative; z-index: 20;">
                         <h1>Happy Birthday</h1>
@@ -618,16 +716,20 @@
                     <div class="page-number">Cover</div>
                 </div>
 
-                <!-- PAGE 2: LOVE LETTER from SOHAM (Right) - HIDDEN AT START -->
+                <!-- PAGE 2: LOVE LETTER from SOHAM (Right) -->
                 <div class="page right love-letter" id="page2">
+                    <!-- Decorative elements -->
+                    <div class="decor-icon decor-dance-1" style="opacity: 0.1;">💃</div>
+                    <div class="decor-icon decor-art-2" style="opacity: 0.1;">🎨</div>
+                    
                     <div class="page-content">
                         <h2 class="page-title">My Dearest Fahimah</h2>
                         <div class="letter-body">
-                            <p>Every piece of art you create pours magic into this world. And somehow, I get to call you mine.</p>
+                            <p>You move through life with such grace, and you create art that takes my breath away. Somehow, I get to call you mine.</p>
                             
                             <p>This book is bedazzled with gems, just like you bedazzle my life with joy. Each page holds a memory, each gem represents a moment with you that sparkles in my heart.</p>
                             
-                            <p>You see beauty like an artist - finding color in the ordinary, creating masterpieces from nothing. That's who you are, and that's who I fell in love with.</p>
+                            <p>You see beauty like an artist - finding color in the ordinary, creating masterpieces from nothing. And the way you express yourself through movement and creativity - it's pure magic.</p>
                             
                             <p>These pages hold our story. The art we've created together, the food we've shared, and the memories we've made.</p>
                             
@@ -637,15 +739,26 @@
                             Forever yours, <br>
                             Soham ❤️
                         </div>
-                        <div class="wax-seal">🎨</div>
+                        <div class="wax-seal">✨</div>
                     </div>
                     <div class="page-number">1</div>
                 </div>
 
-                <!-- PAGE 3: ART THEME (Left) -->
-                <div class="page left" id="page3">
+                <!-- PAGE 3: ART THEME - ENHANCED with more art elements (Left) -->
+                <div class="page left art-page" id="page3">
+                    <!-- Decorative dancing elements on art page -->
+                    <div class="decor-icon decor-dance-2" style="opacity: 0.1;">🩰</div>
+                    
                     <div class="page-content">
-                        <h2 class="page-title">For the Artist</h2>
+                        <h2 class="page-title">For the Artist & Dreamer</h2>
+                        
+                        <div class="art-tools">
+                            <span>🎨</span>
+                            <span>🖌️</span>
+                            <span>✏️</span>
+                            <span>🖼️</span>
+                            <span>✨</span>
+                        </div>
                         
                         <div class="art-quote">
                             "Every artist was first an amateur. You, my love, are a masterpiece in progress."
@@ -674,7 +787,13 @@
                             </div>
                         </div>
                         
-                        <p style="text-align: center; font-size: 1.1rem; margin-top: 15px; color: #8b1a1a;">
+                        <div style="text-align: center; margin-top: 20px; font-size: 2rem;">
+                            <span style="display: inline-block; animation: gentleFloat 4s infinite;">🎨</span>
+                            <span style="display: inline-block; animation: gentleFloat 4.5s infinite;">✨</span>
+                            <span style="display: inline-block; animation: gentleFloat 5s infinite;">🖌️</span>
+                        </div>
+                        
+                        <p style="text-align: center; font-size: 1.1rem; margin-top: 15px; color: #8b1a1a; font-weight: bold;">
                             My favorite artwork? The one you're still creating - us.
                         </p>
                     </div>
@@ -683,6 +802,9 @@
 
                 <!-- PAGE 4: MEMORIES 1 (Right) -->
                 <div class="page right" id="page4">
+                    <!-- Decorative elements -->
+                    <div class="decor-icon decor-art-1" style="opacity: 0.1;">🎨</div>
+                    
                     <div class="page-content">
                         <h2 class="page-title">Our Best Memories</h2>
                         <div class="memory-grid">
@@ -711,6 +833,9 @@
 
                 <!-- PAGE 5: MEMORIES 2 (Left) -->
                 <div class="page left" id="page5">
+                    <!-- Decorative elements -->
+                    <div class="decor-icon decor-dance-1" style="opacity: 0.1;">💃</div>
+                    
                     <div class="page-content">
                         <h2 class="page-title">More Beautiful Moments</h2>
                         <div class="memory-grid">
@@ -739,6 +864,9 @@
 
                 <!-- PAGE 6: BEST EATS (Right) -->
                 <div class="page right" id="page6">
+                    <!-- Decorative elements -->
+                    <div class="decor-icon decor-art-2" style="opacity: 0.1;">🖌️</div>
+                    
                     <div class="page-content">
                         <h2 class="page-title">Our Best Eats</h2>
                         <div class="eats-container">
@@ -777,20 +905,26 @@
                     <div class="page-number">5</div>
                 </div>
 
-                <!-- PAGE 7: FINAL PAGE (Left) -->
+                <!-- PAGE 7: FINAL PAGE (Left) - with both themes -->
                 <div class="page left final-page" id="page7">
+                    <!-- Decorative elements -->
+                    <div class="decor-icon decor-dance-1" style="top: 20px; right: 20px;">💃</div>
+                    <div class="decor-icon decor-dance-2" style="bottom: 20px; left: 20px;">🩰</div>
+                    <div class="decor-icon decor-art-1" style="top: 40px; left: 40px;">🎨</div>
+                    <div class="decor-icon decor-art-2" style="bottom: 40px; right: 40px;">🖼️</div>
+                    
                     <div class="page-content">
                         <div class="big-text">Keep Creating, Keep Shining</div>
                         
                         <div style="margin: 30px 0; font-size: 3rem;">
                             <span class="balloon">🎨</span>
+                            <span class="balloon">💃</span>
                             <span class="balloon">✨</span>
-                            <span class="balloon">💝</span>
                         </div>
                         
                         <p style="font-size: 1.2rem; margin: 20px 0; line-height: 1.8;">
                             You are the art I never want to stop admiring.<br>
-                            The masterpiece I'm grateful to see every day.<br>
+                            The movement that brings joy to my world.<br>
                             The gem that makes my life sparkle.
                         </p>
                         
@@ -801,6 +935,10 @@
                         <div class="signature">
                             Happy Birthday, Fahimah! <br>
                             Love, Soham 💝
+                        </div>
+                        
+                        <div style="margin-top: 20px; font-size: 2rem; opacity: 0.5;">
+                            ✦ 🎨 💃 ✨ 🖼️ 🩰 ✦
                         </div>
                     </div>
                     <div class="page-number">6</div>

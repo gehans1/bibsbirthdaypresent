@@ -21,33 +21,6 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow-x: hidden;
-        }
-
-        /* Ambient background sparkles */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, rgba(255,215,0,0.3), transparent),
-                radial-gradient(2px 2px at 40px 70px, rgba(255,100,100,0.2), transparent),
-                radial-gradient(2px 2px at 50px 160px, rgba(255,215,0,0.3), transparent),
-                radial-gradient(2px 2px at 90px 40px, rgba(255,150,150,0.2), transparent),
-                radial-gradient(2px 2px at 130px 80px, rgba(255,215,0,0.2), transparent),
-                radial-gradient(2px 2px at 160px 120px, rgba(255,100,100,0.3), transparent);
-            background-size: 200px 200px;
-            animation: sparkleFloat 20s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes sparkleFloat {
-            from { transform: translateY(0); }
-            to { transform: translateY(-200px); }
         }
 
         h1, h2, h3 {
@@ -56,161 +29,102 @@
 
         /* Book Container */
         .book-container {
-            perspective: 2500px;
             width: 100%;
-            max-width: 900px;
-            height: 600px;
+            max-width: 950px;
             position: relative;
-            z-index: 1;
         }
 
-        .book {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateX(5deg);
-            transition: transform 0.3s ease;
-        }
-
-        .book:hover {
-            transform: rotateX(2deg);
-        }
-
-        /* Book spine effect */
-        .book::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: -5px;
-            bottom: -5px;
-            width: 40px;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg,
-                #2a1a10 0%,
-                #5c4030 20%,
-                #8b6b50 50%,
-                #5c4030 80%,
-                #2a1a10 100%);
-            border-radius: 3px;
-            z-index: 100;
-            box-shadow: 
-                inset 0 0 20px rgba(0,0,0,0.5),
-                0 0 10px rgba(0,0,0,0.5);
-        }
-
-        /* Page spread container */
+        /* Each spread is a flex container with two pages */
         .spread {
-            position: absolute;
+            display: none;
             width: 100%;
-            height: 100%;
-            display: flex;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
+            min-height: 580px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .spread.active {
-            opacity: 1;
-            pointer-events: auto;
+            display: flex;
         }
 
         /* Individual pages */
         .page {
             width: 50%;
-            height: 100%;
-            padding: 40px;
+            min-height: 580px;
+            padding: 35px;
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .page.left {
+        .page.left-page {
             background: linear-gradient(to right, #faf6f0 0%, #f5efe5 100%);
-            border-radius: 8px 0 0 8px;
-            box-shadow: 
-                inset -20px 0 40px rgba(0,0,0,0.05),
-                -5px 0 20px rgba(0,0,0,0.2);
+            border-right: 1px solid #d4c4b0;
         }
 
-        .page.right {
+        .page.right-page {
             background: linear-gradient(to left, #faf6f0 0%, #f5efe5 100%);
-            border-radius: 0 8px 8px 0;
-            box-shadow: 
-                inset 20px 0 40px rgba(0,0,0,0.05),
-                5px 0 20px rgba(0,0,0,0.2);
+            border-left: 1px solid #d4c4b0;
         }
 
-        /* Page texture */
-        .page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
+        .page.full-page {
+            width: 100%;
         }
 
-        /* Page fold line */
-        .page.left::after {
+        /* Page shadow effects */
+        .page.left-page::after {
             content: '';
             position: absolute;
             right: 0;
             top: 0;
             bottom: 0;
-            width: 30px;
-            background: linear-gradient(to left, rgba(0,0,0,0.08), transparent);
+            width: 40px;
+            background: linear-gradient(to left, rgba(0,0,0,0.06), transparent);
             pointer-events: none;
         }
 
-        .page.right::after {
+        .page.right-page::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 30px;
-            background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
+            width: 40px;
+            background: linear-gradient(to right, rgba(0,0,0,0.06), transparent);
             pointer-events: none;
+            z-index: 1;
         }
 
         /* Page numbers */
         .page-num {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             font-size: 0.85rem;
-            color: #b8a090;
+            color: #a09080;
             font-style: italic;
         }
 
-        .page.left .page-num { left: 30px; }
-        .page.right .page-num { right: 30px; }
+        .left-page .page-num { left: 25px; }
+        .right-page .page-num { right: 25px; }
 
-        /* ========== COVER PAGE ========== */
+        /* ============ COVER PAGE ============ */
         .cover-page {
-            background: linear-gradient(135deg, #8b1538 0%, #5c0a20 50%, #3a0515 100%) !important;
-            color: #fff;
+            background: linear-gradient(145deg, #9b1b30 0%, #6b1020 40%, #3a0810 100%) !important;
+            color: white;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-radius: 8px !important;
-            box-shadow: 
-                inset 0 0 100px rgba(0,0,0,0.3),
-                0 10px 40px rgba(0,0,0,0.5) !important;
+            border: none !important;
         }
 
+        .cover-page::after,
         .cover-page::before {
-            background: 
-                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
-            opacity: 1;
+            display: none !important;
         }
 
-        /* Gems on cover */
-        .gems-container {
+        /* Gems */
+        .gems {
             position: absolute;
             top: 0;
             left: 0;
@@ -222,29 +136,29 @@
 
         .gem {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
-            animation: gemSparkle 3s ease-in-out infinite;
+            width: 22px;
+            height: 22px;
+            clip-path: polygon(50% 0%, 85% 15%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 15% 15%);
+            animation: sparkle 2.5s ease-in-out infinite;
         }
 
-        .gem-1 { top: 8%; left: 10%; background: #ff6b6b; animation-delay: 0s; }
-        .gem-2 { top: 15%; right: 15%; background: #ffd93d; animation-delay: 0.5s; width: 25px; height: 25px; }
-        .gem-3 { top: 35%; left: 8%; background: #6bcb77; animation-delay: 1s; }
-        .gem-4 { top: 50%; right: 10%; background: #4d96ff; animation-delay: 1.5s; }
-        .gem-5 { bottom: 30%; left: 15%; background: #ff6b9d; animation-delay: 2s; width: 22px; height: 22px; }
-        .gem-6 { bottom: 15%; right: 12%; background: #c9b1ff; animation-delay: 2.5s; }
-        .gem-7 { bottom: 8%; left: 30%; background: #ffd93d; animation-delay: 0.3s; }
-        .gem-8 { top: 25%; right: 30%; background: #ff6b6b; animation-delay: 1.8s; }
+        .gem:nth-child(1) { top: 10%; left: 8%; background: #ff5555; animation-delay: 0s; }
+        .gem:nth-child(2) { top: 8%; right: 12%; background: #ffdd44; animation-delay: 0.4s; width: 28px; height: 28px; }
+        .gem:nth-child(3) { top: 30%; left: 5%; background: #55dd55; animation-delay: 0.8s; }
+        .gem:nth-child(4) { top: 45%; right: 8%; background: #5588ff; animation-delay: 1.2s; width: 25px; height: 25px; }
+        .gem:nth-child(5) { bottom: 35%; left: 10%; background: #ff55aa; animation-delay: 1.6s; }
+        .gem:nth-child(6) { bottom: 20%; right: 10%; background: #aa88ff; animation-delay: 2s; }
+        .gem:nth-child(7) { bottom: 10%; left: 25%; background: #ffaa44; animation-delay: 0.3s; }
+        .gem:nth-child(8) { top: 22%; right: 25%; background: #55ffff; animation-delay: 1.9s; }
 
-        @keyframes gemSparkle {
+        @keyframes sparkle {
             0%, 100% { 
-                filter: drop-shadow(0 0 3px currentColor);
+                filter: drop-shadow(0 0 4px currentColor);
                 transform: scale(1);
             }
             50% { 
-                filter: drop-shadow(0 0 12px currentColor) drop-shadow(0 0 20px white);
-                transform: scale(1.2);
+                filter: drop-shadow(0 0 15px currentColor) drop-shadow(0 0 25px rgba(255,255,255,0.5));
+                transform: scale(1.25);
             }
         }
 
@@ -254,48 +168,44 @@
         }
 
         .cover-content h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
         }
 
         .cover-content h2 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 700;
             color: #ffd700;
-            text-shadow: 
-                2px 2px 4px rgba(0,0,0,0.5),
-                0 0 30px rgba(255,215,0,0.3);
-            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 40px rgba(255,215,0,0.4);
+            margin-bottom: 25px;
         }
 
         .cover-photo {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid #ffd700;
+            border: 5px solid #ffd700;
             object-fit: cover;
-            box-shadow: 
-                0 0 0 4px rgba(255,215,0,0.3),
-                0 10px 30px rgba(0,0,0,0.5);
-            margin: 20px 0;
+            box-shadow: 0 0 0 5px rgba(255,215,0,0.3), 0 15px 40px rgba(0,0,0,0.5);
+            margin: 25px 0;
         }
 
         .cover-subtitle {
             font-style: italic;
-            color: rgba(255,255,255,0.8);
-            font-size: 1.1rem;
-            margin-top: 15px;
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            margin-top: 20px;
         }
 
-        /* ========== CONTENT PAGES ========== */
+        /* ============ CONTENT STYLES ============ */
         .page-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             color: #8b1538;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
             border-bottom: 2px solid #d4b896;
             text-align: center;
         }
@@ -303,32 +213,17 @@
         .page-content {
             flex: 1;
             overflow-y: auto;
-            padding-right: 10px;
         }
 
-        .page-content::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .page-content::-webkit-scrollbar-track {
-            background: #f0e6d8;
-            border-radius: 3px;
-        }
-
-        .page-content::-webkit-scrollbar-thumb {
-            background: #d4b896;
-            border-radius: 3px;
-        }
-
-        /* Letter styling */
+        /* Letter */
         .letter {
-            line-height: 1.9;
+            line-height: 1.85;
             color: #3d2a1a;
             font-size: 1.05rem;
         }
 
         .letter p {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-indent: 1.5em;
         }
 
@@ -338,87 +233,47 @@
 
         .letter-greeting {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #8b1538;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-style: italic;
+            text-indent: 0 !important;
         }
 
         .letter-signature {
             text-align: right;
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 25px;
+            padding-top: 18px;
             border-top: 1px solid #d4b896;
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #8b1538;
         }
 
         .wax-seal {
             position: absolute;
-            bottom: 50px;
-            left: 50px;
-            width: 50px;
-            height: 50px;
-            background: #8b1538;
+            bottom: 40px;
+            left: 40px;
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 30% 30%, #b82040, #8b1538, #5c0a20);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 
-                inset 0 -3px 10px rgba(0,0,0,0.3),
-                0 3px 10px rgba(0,0,0,0.3);
+            font-size: 1.6rem;
+            box-shadow: inset -3px -3px 8px rgba(0,0,0,0.3), 2px 4px 12px rgba(0,0,0,0.4);
         }
 
-        /* Art Section */
-        .art-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .art-card {
-            background: white;
-            padding: 20px 15px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            border: 1px solid #e8ddd0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .art-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-
-        .art-card .emoji {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .art-card h3 {
-            font-size: 1.1rem;
-            color: #8b1538;
-            margin-bottom: 5px;
-        }
-
-        .art-card p {
-            font-size: 0.9rem;
-            color: #6b5a4a;
-        }
-
+        /* Quote box */
         .quote-box {
             background: linear-gradient(135deg, #fff8f0, #f5ebe0);
-            padding: 25px;
+            padding: 22px 25px;
             border-radius: 12px;
-            border-left: 4px solid #8b1538;
-            margin: 20px 0;
+            border-left: 5px solid #8b1538;
+            margin: 18px 0;
             font-style: italic;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #4a3a2a;
             text-align: center;
             position: relative;
@@ -427,16 +282,55 @@
         .quote-box::before {
             content: '"';
             position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 3rem;
+            top: 5px;
+            left: 12px;
+            font-size: 3.5rem;
             color: #8b1538;
-            opacity: 0.2;
+            opacity: 0.15;
             font-family: Georgia, serif;
             line-height: 1;
         }
 
-        /* Memory Items */
+        /* Art cards */
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .art-card {
+            background: white;
+            padding: 18px 12px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8ddd0;
+            transition: transform 0.3s ease;
+        }
+
+        .art-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .art-card .emoji {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .art-card h3 {
+            font-size: 1rem;
+            color: #8b1538;
+            margin-bottom: 4px;
+        }
+
+        .art-card p {
+            font-size: 0.85rem;
+            color: #6b5a4a;
+        }
+
+        /* Memory items */
         .memory-item {
             display: flex;
             gap: 15px;
@@ -444,17 +338,17 @@
             padding: 15px;
             border-radius: 12px;
             margin-bottom: 15px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
             border: 1px solid #e8ddd0;
         }
 
-        .memory-item:nth-child(even) {
+        .memory-item.reverse {
             flex-direction: row-reverse;
         }
 
         .memory-img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 10px;
             object-fit: cover;
             flex-shrink: 0;
@@ -462,159 +356,179 @@
         }
 
         .memory-text h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #8b1538;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .memory-text p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #5a4a3a;
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
-        /* Food Rankings */
+        /* Food items */
         .food-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px;
+            gap: 12px;
+            padding: 14px;
             border-radius: 12px;
             margin-bottom: 12px;
         }
 
         .food-item.gold { 
-            background: linear-gradient(135deg, #fff9e6, #ffecb3);
-            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #fffae6, #ffecb3);
+            border: 2px solid #ffc800;
         }
         .food-item.silver { 
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            border: 2px solid #c0c0c0;
+            background: linear-gradient(135deg, #f8f8f8, #e5e5e5);
+            border: 2px solid #b0b0b0;
         }
         .food-item.bronze { 
-            background: linear-gradient(135deg, #fff0e0, #ffe0c0);
+            background: linear-gradient(135deg, #fff5e8, #ffe4c4);
             border: 2px solid #cd853f;
         }
 
         .food-medal {
             font-size: 2rem;
+            flex-shrink: 0;
         }
 
         .food-img {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid white;
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            flex-shrink: 0;
         }
 
         .food-text h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #3d2a1a;
             margin-bottom: 3px;
         }
 
         .food-text p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #6b5a4a;
         }
 
-        /* Final Page */
+        /* ============ FINAL PAGE ============ */
         .final-page {
+            background: linear-gradient(145deg, #fff5eb, #ffebe0, #fff5eb) !important;
             justify-content: center;
             align-items: center;
             text-align: center;
+            border: none !important;
         }
 
-        .final-page .big-text {
+        .final-page::after,
+        .final-page::before {
+            display: none !important;
+        }
+
+        .final-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #8b1538;
             margin-bottom: 25px;
         }
 
         .balloon-row {
-            font-size: 3rem;
-            margin: 20px 0;
+            font-size: 3.5rem;
+            margin: 25px 0;
         }
 
         .balloon-row span {
             display: inline-block;
-            animation: floatBalloon 2s ease-in-out infinite;
-            margin: 0 10px;
+            animation: floatUp 2.5s ease-in-out infinite;
+            margin: 0 12px;
         }
 
-        .balloon-row span:nth-child(2) { animation-delay: 0.3s; }
-        .balloon-row span:nth-child(3) { animation-delay: 0.6s; }
+        .balloon-row span:nth-child(2) { animation-delay: 0.35s; }
+        .balloon-row span:nth-child(3) { animation-delay: 0.7s; }
 
-        @keyframes floatBalloon {
+        @keyframes floatUp {
             0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(-18px) rotate(5deg); }
         }
 
         .final-message {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: #4a3a2a;
-            line-height: 2;
+            line-height: 2.2;
             margin: 25px 0;
         }
 
         .final-signature {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #8b1538;
             margin-top: 30px;
+            line-height: 1.6;
         }
 
-        /* ========== NAVIGATION ========== */
+        .final-decoration {
+            margin-top: 30px;
+            font-size: 1.6rem;
+            opacity: 0.5;
+            letter-spacing: 8px;
+        }
+
+        /* ============ NAVIGATION ============ */
         .nav-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 25px;
             margin-top: 30px;
-            position: relative;
-            z-index: 10;
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #8b1538, #5c0a20);
+            background: linear-gradient(145deg, #9b1b30, #6b1020);
             color: white;
             border: 2px solid #ffd700;
-            padding: 12px 30px;
-            font-size: 1rem;
+            padding: 14px 35px;
+            font-size: 1.05rem;
             font-family: 'Playfair Display', serif;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #a52050, #8b1538);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            background: linear-gradient(145deg, #b52545, #8b1538);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
         }
 
         .nav-btn:disabled {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: not-allowed;
-            transform: none;
         }
 
-        .page-dots {
+        .page-indicator {
             display: flex;
-            gap: 8px;
+            gap: 10px;
+            align-items: center;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: rgba(255,215,0,0.3);
-            border: 1px solid #ffd700;
+            background: rgba(255,215,0,0.25);
+            border: 2px solid #ffd700;
+            cursor: pointer;
             transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: rgba(255,215,0,0.5);
         }
 
         .dot.active {
@@ -622,329 +536,334 @@
             transform: scale(1.3);
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .book-container {
-                height: 500px;
-            }
-            .page {
-                padding: 25px;
-            }
-            .cover-content h1 {
-                font-size: 2rem;
-            }
-            .cover-content h2 {
-                font-size: 2.5rem;
-            }
-            .cover-photo {
-                width: 120px;
-                height: 120px;
-            }
+        .page-text {
+            color: #d4b896;
+            font-style: italic;
+            font-size: 1rem;
+            min-width: 100px;
+            text-align: center;
         }
 
-        @media (max-width: 600px) {
-            .book-container {
-                height: auto;
-                min-height: 500px;
-            }
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 800px) {
             .spread {
                 flex-direction: column;
+                min-height: auto;
             }
             .page {
                 width: 100%;
-                border-radius: 8px !important;
+                min-height: 450px;
             }
-            .page.left {
-                border-radius: 8px 8px 0 0 !important;
+            .page.left-page {
+                border-right: none;
+                border-bottom: 1px solid #d4c4b0;
             }
-            .page.right {
-                border-radius: 0 0 8px 8px !important;
+            .page.right-page {
+                border-left: none;
+                border-top: 1px solid #d4c4b0;
             }
-            .book::before {
-                display: none;
-            }
+            .cover-content h1 { font-size: 2.2rem; }
+            .cover-content h2 { font-size: 2.8rem; }
+            .cover-photo { width: 140px; height: 140px; }
+            .nav-btn { padding: 12px 25px; font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="book-container">
-        <div class="book">
-            
-            <!-- SPREAD 1: Cover -->
-            <div class="spread active" data-spread="1">
-                <div class="page left cover-page" style="width: 100%; border-radius: 8px;">
-                    <div class="gems-container">
-                        <div class="gem gem-1"></div>
-                        <div class="gem gem-2"></div>
-                        <div class="gem gem-3"></div>
-                        <div class="gem gem-4"></div>
-                        <div class="gem gem-5"></div>
-                        <div class="gem gem-6"></div>
-                        <div class="gem gem-7"></div>
-                        <div class="gem gem-8"></div>
-                    </div>
-                    <div class="cover-content">
-                        <h1>Happy Birthday</h1>
-                        <h2>✨ Fahimah ✨</h2>
-                        <img src="images/us.jpg" alt="Us" class="cover-photo" 
-                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22 viewBox=%220 0 160 160%22><rect width=%22160%22 height=%22160%22 fill=%22%238b1538%22/><text x=%2280%22 y=%22100%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23ffd700%22>💕</text></svg>'">
-                        <p class="cover-subtitle">A story bedazzled with love 💎</p>
-                    </div>
+
+        <!-- ========== SPREAD 1: COVER ========== -->
+        <div class="spread active" id="spread-1">
+            <div class="page full-page cover-page">
+                <div class="gems">
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                    <div class="gem"></div>
+                </div>
+                <div class="cover-content">
+                    <h1>Happy Birthday</h1>
+                    <h2>✨ Fahimah ✨</h2>
+                    <img src="images/us.jpg" alt="Us Together" class="cover-photo" 
+                         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22><rect width=%22180%22 height=%22180%22 fill=%22%238b1538%22/><text x=%2290%22 y=%22110%22 font-size=%2270%22 text-anchor=%22middle%22>💕</text></svg>'">
+                    <p class="cover-subtitle">A story bedazzled with love 💎</p>
                 </div>
             </div>
-
-            <!-- SPREAD 2: Love Letter -->
-            <div class="spread" data-spread="2">
-                <div class="page left">
-                    <h2 class="page-title">My Dearest Fahimah</h2>
-                    <div class="page-content">
-                        <div class="letter">
-                            <p class="letter-greeting">To the one who colors my world...</p>
-                            <p>You move through life with such grace, and you create art that takes my breath away. Somehow, I get to call you mine.</p>
-                            <p>This book is bedazzled with gems, just like you bedazzle my life with joy. Each page holds a memory, each gem represents a moment with you that sparkles in my heart.</p>
-                            <p>You see beauty like an artist - finding color in the ordinary, creating masterpieces from nothing. And the way you express yourself through movement and creativity - it's pure magic.</p>
-                        </div>
-                    </div>
-                    <div class="wax-seal">💕</div>
-                    <span class="page-num">1</span>
-                </div>
-                <div class="page right">
-                    <div class="page-content" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
-                        <div class="letter" style="margin-top: 40px;">
-                            <p>These pages hold our story. The art we've created together, the food we've shared, and the memories we've made.</p>
-                            <p>Every day with you feels like discovering a new color I've never seen before. You make everything more beautiful.</p>
-                            <p>Happy birthday, my love. Here's to another year of creating beautiful things together.</p>
-                            <div class="letter-signature">
-                                Forever yours,<br>
-                                <span style="font-size: 1.5rem;">Soham 💝</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="page-num">2</span>
-                </div>
-            </div>
-
-            <!-- SPREAD 3: Art Theme -->
-            <div class="spread" data-spread="3">
-                <div class="page left">
-                    <h2 class="page-title">For the Artist 🎨</h2>
-                    <div class="page-content">
-                        <div class="quote-box">
-                            Every artist was first an amateur. You, my love, are a masterpiece in progress.
-                        </div>
-                        <div class="art-grid">
-                            <div class="art-card">
-                                <span class="emoji">🎨</span>
-                                <h3>Painter</h3>
-                                <p>You see beauty where others don't</p>
-                            </div>
-                            <div class="art-card">
-                                <span class="emoji">✏️</span>
-                                <h3>Creator</h3>
-                                <p>You bring imagination to life</p>
-                            </div>
-                            <div class="art-card">
-                                <span class="emoji">🖼️</span>
-                                <h3>Visionary</h3>
-                                <p>Your perspective is unique</p>
-                            </div>
-                            <div class="art-card">
-                                <span class="emoji">💫</span>
-                                <h3>Inspiration</h3>
-                                <p>You inspire everyone around</p>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="page-num">3</span>
-                </div>
-                <div class="page right">
-                    <h2 class="page-title">Our Best Memories</h2>
-                    <div class="page-content">
-                        <div class="memory-item">
-                            <img src="images/memory1.jpg" alt="Memory" class="memory-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23d4b896%22/><text x=%2250%22 y=%2260%22 font-size=%2230%22 text-anchor=%22middle%22>🎨</text></svg>'">
-                            <div class="memory-text">
-                                <h3>Our First Art Date</h3>
-                                <p>We tried to paint together. Yours was a masterpiece, mine looked like a toddler's scribble. But we laughed until we cried.</p>
-                            </div>
-                        </div>
-                        <div class="memory-item">
-                            <img src="images/memory2.jpg" alt="Memory" class="memory-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23d4b896%22/><text x=%2250%22 y=%2260%22 font-size=%2230%22 text-anchor=%22middle%22>🖼️</text></svg>'">
-                            <div class="memory-text">
-                                <h3>The Gallery Day</h3>
-                                <p>Walking through that art gallery, you explained every piece to me. I wasn't looking at the art - I was watching your eyes light up.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="page-num">4</span>
-                </div>
-            </div>
-
-            <!-- SPREAD 4: More Memories + Food -->
-            <div class="spread" data-spread="4">
-                <div class="page left">
-                    <h2 class="page-title">More Beautiful Moments</h2>
-                    <div class="page-content">
-                        <div class="memory-item">
-                            <img src="images/memory3.jpg" alt="Memory" class="memory-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23d4b896%22/><text x=%2250%22 y=%2260%22 font-size=%2230%22 text-anchor=%22middle%22>🌙</text></svg>'">
-                            <div class="memory-text">
-                                <h3>Late Night Creating</h3>
-                                <p>Watching you sketch at 2am, completely lost in your art. Paint on your hands, that look of pure focus - I fell in love all over again.</p>
-                            </div>
-                        </div>
-                        <div class="memory-item">
-                            <img src="images/memory4.jpg" alt="Memory" class="memory-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23d4b896%22/><text x=%2250%22 y=%2260%22 font-size=%2230%22 text-anchor=%22middle%22>✨</text></svg>'">
-                            <div class="memory-text">
-                                <h3>The Art You Made for Me</h3>
-                                <p>You gave me something you created with your own hands. I'll treasure it forever, just like I treasure you.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="page-num">5</span>
-                </div>
-                <div class="page right">
-                    <h2 class="page-title">Our Best Eats 🍽️</h2>
-                    <div class="page-content">
-                        <div class="food-item gold">
-                            <span class="food-medal">🥇</span>
-                            <img src="images/food1.jpg" alt="Food" class="food-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22><rect width=%2270%22 height=%2270%22 fill=%22%23ffd700%22/><text x=%2235%22 y=%2245%22 font-size=%2225%22 text-anchor=%22middle%22>🍝</text></svg>'">
-                            <div class="food-text">
-                                <h3>#1 Our Celebration Spot</h3>
-                                <p>Every birthday, every milestone - the food is amazing but the company is better.</p>
-                            </div>
-                        </div>
-                        <div class="food-item silver">
-                            <span class="food-medal">🥈</span>
-                            <img src="images/food2.jpg" alt="Food" class="food-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22><rect width=%2270%22 height=%2270%22 fill=%22%23c0c0c0%22/><text x=%2235%22 y=%2245%22 font-size=%2225%22 text-anchor=%22middle%22>🍜</text></svg>'">
-                            <div class="food-text">
-                                <h3>#2 Our Comfort Spot</h3>
-                                <p>Rainy days or bad days - this is where we go to feel better.</p>
-                            </div>
-                        </div>
-                        <div class="food-item bronze">
-                            <span class="food-medal">🥉</span>
-                            <img src="images/food3.jpg" alt="Food" class="food-img"
-                                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22><rect width=%2270%22 height=%2270%22 fill=%22%23cd853f%22/><text x=%2235%22 y=%2245%22 font-size=%2225%22 text-anchor=%22middle%22>🍦</text></svg>'">
-                            <div class="food-text">
-                                <h3>#3 Midnight Cravings</h3>
-                                <p>2am ice cream and deep conversations. The best flavor is you.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="page-num">6</span>
-                </div>
-            </div>
-
-            <!-- SPREAD 5: Final Page -->
-            <div class="spread" data-spread="5">
-                <div class="page left final-page" style="width: 100%; border-radius: 8px;">
-                    <div class="big-text">Keep Creating, Keep Shining ✨</div>
-                    
-                    <div class="balloon-row">
-                        <span>🎨</span>
-                        <span>💃</span>
-                        <span>🎂</span>
-                    </div>
-                    
-                    <div class="final-message">
-                        You are the art I never want to stop admiring.<br>
-                        The movement that brings joy to my world.<br>
-                        The gem that makes my life sparkle.
-                    </div>
-                    
-                    <div style="font-size: 2rem; margin: 20px 0;">
-                        🎈 🎈 🎈
-                    </div>
-                    
-                    <div class="final-signature">
-                        Happy Birthday, Fahimah!<br>
-                        <span style="font-size: 1.2rem;">With all my love,</span><br>
-                        Soham 💝
-                    </div>
-                    
-                    <div style="margin-top: 30px; font-size: 1.5rem; opacity: 0.5;">
-                        ✦ 🎨 💎 ✨ 🖼️ 💕 ✦
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <!-- ========== SPREAD 2: LOVE LETTER ========== -->
+        <div class="spread" id="spread-2">
+            <div class="page left-page">
+                <h2 class="page-title">My Dearest Fahimah</h2>
+                <div class="page-content">
+                    <div class="letter">
+                        <p class="letter-greeting">To the one who colors my world...</p>
+                        <p>You move through life with such grace, and you create art that takes my breath away. Somehow, I get to call you mine.</p>
+                        <p>This book is bedazzled with gems, just like you bedazzle my life with joy. Each page holds a memory, each gem represents a moment with you that sparkles in my heart.</p>
+                        <p>You see beauty like an artist - finding color in the ordinary, creating masterpieces from nothing. And the way you express yourself through movement and creativity - it's pure magic.</p>
+                    </div>
+                </div>
+                <div class="wax-seal">💕</div>
+                <span class="page-num">1</span>
+            </div>
+            <div class="page right-page">
+                <div class="page-content" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="letter">
+                        <p>These pages hold our story. The art we've created together, the food we've shared, and the memories we've made.</p>
+                        <p>Every day with you feels like discovering a new color I've never seen before. You make everything more beautiful.</p>
+                        <p>Happy birthday, my love. Here's to another year of creating beautiful things together.</p>
+                        <div class="letter-signature">
+                            Forever yours,<br>
+                            <span style="font-size: 1.6rem;">Soham 💝</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="page-num">2</span>
+            </div>
+        </div>
+
+        <!-- ========== SPREAD 3: ART + MEMORIES ========== -->
+        <div class="spread" id="spread-3">
+            <div class="page left-page">
+                <h2 class="page-title">For the Artist 🎨</h2>
+                <div class="page-content">
+                    <div class="quote-box">
+                        Every artist was first an amateur. You, my love, are a masterpiece in progress.
+                    </div>
+                    <div class="art-grid">
+                        <div class="art-card">
+                            <span class="emoji">🎨</span>
+                            <h3>Painter</h3>
+                            <p>You see beauty everywhere</p>
+                        </div>
+                        <div class="art-card">
+                            <span class="emoji">✏️</span>
+                            <h3>Creator</h3>
+                            <p>You bring ideas to life</p>
+                        </div>
+                        <div class="art-card">
+                            <span class="emoji">🖼️</span>
+                            <h3>Visionary</h3>
+                            <p>Your view is unique</p>
+                        </div>
+                        <div class="art-card">
+                            <span class="emoji">💫</span>
+                            <h3>Inspiration</h3>
+                            <p>You inspire me daily</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 15px; color: #8b1538; font-weight: bold;">My favorite artwork? The one you're still creating — us.</p>
+                </div>
+                <span class="page-num">3</span>
+            </div>
+            <div class="page right-page">
+                <h2 class="page-title">Our Best Memories</h2>
+                <div class="page-content">
+                    <div class="memory-item">
+                        <img src="images/memory1.jpg" alt="Memory 1" class="memory-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22><rect width=%2290%22 height=%2290%22 fill=%22%23d4b896%22/><text x=%2245%22 y=%2255%22 font-size=%2228%22 text-anchor=%22middle%22>🎨</text></svg>'">
+                        <div class="memory-text">
+                            <h3>Our First Art Date</h3>
+                            <p>We tried to paint together. Yours was a masterpiece, mine looked like a toddler's scribble. But we laughed until we cried.</p>
+                        </div>
+                    </div>
+                    <div class="memory-item reverse">
+                        <img src="images/memory2.jpg" alt="Memory 2" class="memory-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22><rect width=%2290%22 height=%2290%22 fill=%22%23d4b896%22/><text x=%2245%22 y=%2255%22 font-size=%2228%22 text-anchor=%22middle%22>🖼️</text></svg>'">
+                        <div class="memory-text">
+                            <h3>The Gallery Day</h3>
+                            <p>Walking through that art gallery, you explained every piece to me. I wasn't looking at the art - I was watching your eyes light up.</p>
+                        </div>
+                    </div>
+                </div>
+                <span class="page-num">4</span>
+            </div>
+        </div>
+
+        <!-- ========== SPREAD 4: MORE MEMORIES + FOOD ========== -->
+        <div class="spread" id="spread-4">
+            <div class="page left-page">
+                <h2 class="page-title">More Beautiful Moments</h2>
+                <div class="page-content">
+                    <div class="memory-item">
+                        <img src="images/memory3.jpg" alt="Memory 3" class="memory-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22><rect width=%2290%22 height=%2290%22 fill=%22%23d4b896%22/><text x=%2245%22 y=%2255%22 font-size=%2228%22 text-anchor=%22middle%22>🌙</text></svg>'">
+                        <div class="memory-text">
+                            <h3>Late Night Creating</h3>
+                            <p>Watching you sketch at 2am, completely lost in your art. Paint on your hands, that look of pure focus - I fell in love all over again.</p>
+                        </div>
+                    </div>
+                    <div class="memory-item reverse">
+                        <img src="images/memory4.jpg" alt="Memory 4" class="memory-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2290%22 height=%2290%22><rect width=%2290%22 height=%2290%22 fill=%22%23d4b896%22/><text x=%2245%22 y=%2255%22 font-size=%2228%22 text-anchor=%22middle%22>✨</text></svg>'">
+                        <div class="memory-text">
+                            <h3>The Art You Made for Me</h3>
+                            <p>You gave me something you created with your own hands. I'll treasure it forever, just like I treasure you.</p>
+                        </div>
+                    </div>
+                </div>
+                <span class="page-num">5</span>
+            </div>
+            <div class="page right-page">
+                <h2 class="page-title">Our Best Eats 🍽️</h2>
+                <div class="page-content">
+                    <div class="food-item gold">
+                        <span class="food-medal">🥇</span>
+                        <img src="images/food1.jpg" alt="Food 1" class="food-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2265%22 height=%2265%22><rect width=%2265%22 height=%2265%22 fill=%22%23ffc800%22/><text x=%2232%22 y=%2242%22 font-size=%2222%22 text-anchor=%22middle%22>🍝</text></svg>'">
+                        <div class="food-text">
+                            <h3>#1 Our Celebration Spot</h3>
+                            <p>Every birthday, every milestone - the food is great but the company is better.</p>
+                        </div>
+                    </div>
+                    <div class="food-item silver">
+                        <span class="food-medal">🥈</span>
+                        <img src="images/food2.jpg" alt="Food 2" class="food-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2265%22 height=%2265%22><rect width=%2265%22 height=%2265%22 fill=%22%23b0b0b0%22/><text x=%2232%22 y=%2242%22 font-size=%2222%22 text-anchor=%22middle%22>🍜</text></svg>'">
+                        <div class="food-text">
+                            <h3>#2 Our Comfort Spot</h3>
+                            <p>Rainy days or bad days - this is where we go to feel better together.</p>
+                        </div>
+                    </div>
+                    <div class="food-item bronze">
+                        <span class="food-medal">🥉</span>
+                        <img src="images/food3.jpg" alt="Food 3" class="food-img"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2265%22 height=%2265%22><rect width=%2265%22 height=%2265%22 fill=%22%23cd853f%22/><text x=%2232%22 y=%2242%22 font-size=%2222%22 text-anchor=%22middle%22>🍦</text></svg>'">
+                        <div class="food-text">
+                            <h3>#3 Midnight Cravings</h3>
+                            <p>2am ice cream runs and deep conversations. The best flavor is you.</p>
+                        </div>
+                    </div>
+                </div>
+                <span class="page-num">6</span>
+            </div>
+        </div>
+
+        <!-- ========== SPREAD 5: FINAL PAGE ========== -->
+        <div class="spread" id="spread-5">
+            <div class="page full-page final-page">
+                <div class="final-title">Keep Creating, Keep Shining ✨</div>
+                
+                <div class="balloon-row">
+                    <span>🎨</span>
+                    <span>💃</span>
+                    <span>🎂</span>
+                </div>
+                
+                <div class="final-message">
+                    You are the art I never want to stop admiring.<br>
+                    The movement that brings joy to my world.<br>
+                    The gem that makes my life sparkle.
+                </div>
+                
+                <div style="font-size: 2.5rem; margin: 20px 0;">
+                    🎈 🎈 🎈
+                </div>
+                
+                <div class="final-signature">
+                    Happy Birthday, Fahimah!<br>
+                    <span style="font-size: 1.1rem; font-style: italic;">With all my love,</span><br>
+                    Soham 💝
+                </div>
+                
+                <div class="final-decoration">✦ 🎨 💎 ✨ 💕 ✦</div>
+            </div>
+        </div>
+
     </div>
 
+    <!-- Navigation -->
     <div class="nav-container">
-        <button class="nav-btn" id="prevBtn" onclick="prevPage()">← Previous</button>
-        <div class="page-dots" id="pageDots"></div>
-        <button class="nav-btn" id="nextBtn" onclick="nextPage()">Next →</button>
+        <button class="nav-btn" id="prevBtn">← Previous</button>
+        <div class="page-indicator">
+            <div class="dot active" data-page="1"></div>
+            <div class="dot" data-page="2"></div>
+            <div class="dot" data-page="3"></div>
+            <div class="dot" data-page="4"></div>
+            <div class="dot" data-page="5"></div>
+        </div>
+        <span class="page-text" id="pageText">Cover</span>
+        <button class="nav-btn" id="nextBtn">Next →</button>
     </div>
 
     <script>
+        // Simple, working navigation
         let currentSpread = 1;
         const totalSpreads = 5;
-        const spreads = document.querySelectorAll('.spread');
+
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const dotsContainer = document.getElementById('pageDots');
+        const pageText = document.getElementById('pageText');
+        const dots = document.querySelectorAll('.dot');
 
-        // Create page dots
-        for (let i = 1; i <= totalSpreads; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot' + (i === 1 ? ' active' : '');
-            dot.onclick = () => goToSpread(i);
-            dot.style.cursor = 'pointer';
-            dotsContainer.appendChild(dot);
-        }
+        const pageNames = ['Cover', 'Letter', 'Art & Memories', 'More Memories & Eats', 'Happy Birthday!'];
 
-        function goToSpread(spreadNum) {
+        function showSpread(num) {
             // Hide all spreads
-            spreads.forEach(spread => {
-                spread.classList.remove('active');
-            });
-
-            // Show current spread
-            document.querySelector(`[data-spread="${spreadNum}"]`).classList.add('active');
+            for (let i = 1; i <= totalSpreads; i++) {
+                document.getElementById('spread-' + i).classList.remove('active');
+            }
+            
+            // Show the selected spread
+            document.getElementById('spread-' + num).classList.add('active');
             
             // Update dots
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === spreadNum - 1);
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === num - 1);
             });
-
-            currentSpread = spreadNum;
-
+            
+            // Update text
+            pageText.textContent = pageNames[num - 1];
+            
             // Update buttons
-            prevBtn.disabled = currentSpread === 1;
-            nextBtn.disabled = currentSpread === totalSpreads;
+            prevBtn.disabled = (num === 1);
+            nextBtn.disabled = (num === totalSpreads);
+            
+            currentSpread = num;
         }
 
-        function nextPage() {
-            if (currentSpread < totalSpreads) {
-                goToSpread(currentSpread + 1);
-            }
-        }
-
-        function prevPage() {
+        // Button clicks
+        prevBtn.addEventListener('click', function() {
             if (currentSpread > 1) {
-                goToSpread(currentSpread - 1);
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextPage();
-            } else if (e.key === 'ArrowLeft') {
-                prevPage();
+                showSpread(currentSpread - 1);
             }
         });
 
-        // Initialize
-        goToSpread(1);
+        nextBtn.addEventListener('click', function() {
+            if (currentSpread < totalSpreads) {
+                showSpread(currentSpread + 1);
+            }
+        });
+
+        // Dot clicks
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const page = parseInt(this.getAttribute('data-page'));
+                showSpread(page);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSpread < totalSpreads) {
+                    showSpread(currentSpread + 1);
+                }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSpread > 1) {
+                    showSpread(currentSpread - 1);
+                }
+            }
+        });
+
+        // Initialize - show first spread
+        showSpread(1);
     </script>
 
 </body>
